@@ -12,7 +12,7 @@
 
 3.将cm1106.h和pm2005.h(或者pm2105.h,根据自己PM2.5传感器型号决定)放入ESPHome配置文件夹中，使用daikin-air-sensor.yaml编译固件（没有编译环境可直接使用编译好的固件daikin-air-sensor-factory.bin）。
 
-4.进入[WEB ESPHome](https://web.esphome.io/) 烧录编译好的固件(任意烧录工具均可，无法连接对调USB转TTL刷机板与传感器的RX TX阵脚)。
+4.进入[WEB ESPHome](https://web.esphome.io/) 烧录编译好的固件(任意烧录工具均可，无法连接对调USB转TTL刷机板与传感器的RX TX针脚)。
 
 ## 参考链接
 - [CO2库文件](https://github.com/LeoDJ/ESPHome_Nodes)
