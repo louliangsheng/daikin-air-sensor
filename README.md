@@ -1,5 +1,5 @@
 ## 拆机以及烧录
-1.按照图片位置拆开，都需卡扣结构，注意侧面不能硬撬，是滑开的。
+1.按照图片位置拆开，都是卡扣结构；注意侧面不能硬撬，是滑开的。
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E6%8B%86%E6%9C%BA.jpg" width="700">
 
