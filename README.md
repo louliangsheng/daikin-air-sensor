@@ -14,8 +14,12 @@
 
 4.进入[WEB ESPHome](https://web.esphome.io/) 烧录编译好的固件(任意烧录工具均可，无法连接对调USB转TTL刷机板与传感器的RX TX针脚)。
 
+## 成果展示
+
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/Achievements.png" width="400">
+
 ## 参考链接
-- [CO2库文件](https://github.com/LeoDJ/ESPHome_Nodes)
+- [CO2 cm1106库文件](https://github.com/LeoDJ/ESPHome_Nodes)
 - [感谢奋斗大佬的PM2005(PM2105)库文件](https://github.com/nixieclock)
 
 ## 交流
