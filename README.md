@@ -2,11 +2,11 @@
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/BRY88AB151K.png" width="300">
 
 ## 拆机以及烧录
-1.按照图片位置拆下带指示灯的一面，都是卡扣结构；注意侧面USB甲醛位置不能硬撬，是滑开的。
+1.按照图片位置拆下带指示灯的一面，都是卡扣结构；注意侧面USB甲醛扩展位置不能硬撬，是滑开的。
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E6%8B%86%E6%9C%BA.jpg" width="400">
 
-2.短接图片中GPIO0两个针脚（其中一个为GND），上电即可进入BOOT刷写模式，然后将图片中的RX TX GND连接到USB转TTL刷机板上，USB插到电脑上。
+2.短接图片中GPIO0两个针脚（其中一个为GND），上电即可进入BOOT刷写模式，然后将图片中的RX TX GND连接到USB转TTL刷机板上(侧面USB上的RX TX不能用于刷机)，USB插到电脑上。
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E7%83%A7%E5%BD%95%E6%8E%A5%E5%8F%A3.jpg" width="400">
 
