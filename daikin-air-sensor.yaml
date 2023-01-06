@@ -1,0 +1,158 @@
+esphome:
+  name: daikin-air-sensor
+  project:
+    name: "DAIKIN.BRY88AB151K"
+    version: "BRY88AB151K"
+  # name_add_mac_suffix: true
+  includes:
+    - "cm1106.h"
+    - "pm2105.h"  #拆机根据自己PM2.5传感器型号选择对应的文件
+    # - "pm2005.h"
+
+esp32:
+  board: nodemcu-32s
+  framework:
+    type: arduino
+
+wifi:
+  ssid: 'L'
+  password: '1234567890'
+  ap:
+    ssid: "DAIKIN Fallback Hotspot"
+
+captive_portal:
+
+api:
+
+ota:
+
+web_server:
+  port: 80
+
+logger:
+
+# bluetooth_proxy:  #需要蓝牙代理功能可以打开
+#   active: true
+
+uart:
+- id: cm1106_uart
+  rx_pin: GPIO16
+  tx_pin: GPIO17
+  baud_rate: 9600
+# - id: expand_uart  #侧面USB串口，连接其他传感器时可以打开，未测试，无法驱动可以调换RXTX顺序
+#   tx_pin: GPIO18
+#   rx_pin: GPIO5
+#   baud_rate: 9600
+
+i2c:
+- id: PM25_bus
+  sda: 23
+  scl: 22
+  scan: true
+- id: sgp30_bus
+  sda: GPIO19
+  scl: GPIO21
+  scan: true
+
+sensor:
+- platform: wifi_signal
+  name: "DAIKIN Signal"
+  update_interval: 60s
+- platform: custom
+  lambda: |-
+    auto cm1106Sensor = new CM1106Sensor(id(cm1106_uart), 10000);
+    App.register_component(cm1106Sensor);
+    return {cm1106Sensor};
+  sensors:
+  - name: "DAIKIN CO2 Sensor"
+    accuracy_decimals: 0
+    unit_of_measurement: "ppm"
+    device_class: carbon_dioxide
+- platform: custom
+  lambda: |-
+    auto pm25 = new pm2005();
+    App.register_component(pm25);
+    return {pm25};
+  sensors:
+  - name: "DAIKIN PM2.5 Sensor "
+    unit_of_measurement: μg/m³
+    accuracy_decimals: 0
+    device_class: pm25
+- platform: hdc1080
+  i2c_id: sgp30_bus
+  temperature:
+    name: "DAIKIN Temperature Sensor"
+    filters:
+      - offset: -6.0
+    id: temperature
+  humidity:
+    name: "DAIKIN Humidity Sensor"
+    filters:
+      - offset: 6.0
+    id: humidity
+  update_interval: 30s
+- platform: sgp30
+  i2c_id: sgp30_bus
+  eco2:
+    name: "DAIKIN eCO2"
+    accuracy_decimals: 1
+  tvoc:
+    name: "DAIKIN TVOC"
+    accuracy_decimals: 1
+  compensation:
+    temperature_source: temperature
+    humidity_source: humidity
+  store_baseline: yes
+  address: 0x58
+  update_interval: 1s
+
+switch:
+- platform: custom
+  lambda: |-
+    auto cm1106Calib = new CM1106CalibrateSwitch(id(cm1106_uart));
+    App.register_component(cm1106Calib);
+    return {cm1106Calib};
+  switches:
+  - id: calibration
+    internal: true
+- platform: gpio
+  pin: GPIO4
+  icon: mdi:led-off
+  name: "DAIKIN CO2 LED"
+  id: co2
+- platform: gpio
+  pin: GPIO32
+  icon: mdi:led-off
+  name: "DAIKIN TVOC LED"
+- platform: gpio
+  pin: GPIO33
+  icon: mdi:led-off
+  name: "DAIKIN PM2.5 LED"
+
+light:
+- platform: status_led
+  pin: GPIO25
+  icon: mdi:led-off
+  name: "DAIKIN WiFi LED"
+
+button:
+  - platform: restart
+    name: "DAIKIN Restart"
+  - platform: template
+    name: "DAIKIN CO2 Calibration"
+    on_press:
+      then:
+        - switch.turn_on: calibration
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO34
+    id: RESET
+    internal: true
+    on_press:  #按下背面RESET按钮后CO2指示灯亮，十分钟后将环境CO2浓度设置为基准400ppm并关闭CO2指示灯
+      then:
+        - switch.turn_on: co2
+        - delay: 10min #可自定义修改时间
+        - switch.turn_on: calibration
+        - delay: 10s
+        - switch.turn_off: co2
