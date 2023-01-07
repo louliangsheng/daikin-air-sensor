@@ -10,7 +10,7 @@
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E7%83%A7%E5%BD%95%E6%8E%A5%E5%8F%A3.jpg" width="400">
 
-3.将cm1106.h和pm2005.h(或者pm2105.h,根据自己PM2.5传感器型号决定)放入ESPHome配置文件夹中，使用daikin-air-sensor.yaml编译固件（没有编译环境可直接使用编译好的固件daikin-air-sensor-factory.bin）。
+3.将cm1106.h和pm2005.h(或者pm2105.h,根据自己PM2.5传感器型号决定,pm2005为金属壳,pm2105为塑料壳)放入ESPHome配置文件夹中，使用daikin-air-sensor.yaml编译固件（没有编译环境可直接使用编译好的固件daikin-air-sensor-factory.bin）。
 
 4.进入[WEB ESPHome](https://web.esphome.io/) 烧录编译好的固件(任意烧录工具均可，无法连接可对调USB转TTL刷机板与传感器的RX TX针脚或短接GPIO0后重新上电)。
 
