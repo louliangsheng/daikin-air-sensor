@@ -1,18 +1,19 @@
-## 大金空气传感器
+## [大金空气传感器](http://daikin.shuishushi.com/product/237.html)
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/BRY88AB151K.png" width="300">
 
 ## 拆机以及烧录
-1.按照图片位置拆下带指示灯的一面，都是卡扣结构；拆开后取出PCB板，并查看PM2.5传感器型号，PM2005为金属壳，PM2105为塑料壳。
+1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E6%8B%86%E6%9C%BA.jpg" width="400">
 
-2.将cm1106.h和pm2005.h（或pm2105.h）放入ESPHome配置文件夹中，使用daikin-air-sensor.yaml编译固件。
+2.将cm1106.h和pm2005.h(或pm2105.h)放入ESPHome配置文件夹中，使用daikin-air-sensor.yaml编译固件。
 
 3.短接图片中GPIO0两个针脚（其中一个为GND），短接后上电即可进入BOOT刷写模式，然后将图片中的RXD TXD GND连接到USB转TTL刷机板的TX RX GND上，USB插到电脑上，进入[WEB ESPHome](https://web.esphome.io/) 烧录固件。
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E7%83%A7%E5%BD%95%E6%8E%A5%E5%8F%A3.jpg" width="400">
 
 注意:
+- 根据PM2.5传感器型号选择库文件或固件，其中PM2005为金属壳，PM2105为塑料壳
 - 注意侧面USB扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机
 - 进入BOOT后PCB板上的LED灯不亮
 - 任意烧录工具均可，烧录时无法连接可对调RXD TXD针脚或短接GPIO0后重新上电
