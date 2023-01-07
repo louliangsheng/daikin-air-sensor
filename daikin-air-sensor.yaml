@@ -14,7 +14,7 @@ esp32:
   framework:
     type: arduino
 
-wifi:
+wifi: #填写自己的WiFi及密码
   ssid: 'L'
   password: '1234567890'
   ap:
@@ -139,7 +139,7 @@ button:
   - platform: restart
     name: "DAIKIN Restart"
   - platform: template
-    name: "DAIKIN CO2 Calibration"
+    name: "DAIKIN CO2 Calibration" #按下后会将当前环境CO2浓度设置为基准400ppm，按下时请确保放入室外或此时CO2浓度足够低
     on_press:
       then:
         - switch.turn_on: calibration
@@ -149,7 +149,7 @@ binary_sensor:
     pin: GPIO34
     id: RESET
     internal: true
-    on_press:  #按下背面RESET按钮后CO2指示灯亮，十分钟后将环境CO2浓度设置为基准400ppm并关闭CO2指示灯
+    on_press:  #按下背面RESET按钮后CO2指示灯亮，十分钟后将当前环境CO2浓度设置为基准400ppm并关闭CO2指示灯，按下时请确保放入室外或此时CO2浓度足够低
       then:
         - switch.turn_on: co2
         - delay: 10min #可自定义修改时间
