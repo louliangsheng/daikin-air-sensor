@@ -17,7 +17,7 @@
 - 注意侧面USB扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机
 - 进入BOOT后PCB板上的LED灯不亮
 - 任意烧录工具均可，烧录时无法连接可对调RXD TXD针脚或短接GPIO0后重新上电
-- 若没有编译环境，可直接使用编译好的固件daikin-air-sensor-factory.bin，连接DAIKIN Fallback Hotspot热点进行配网
+- 若没有编译环境，可直接使用编译好的固件daikin-air-sensor-factory.bin，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
 - 进行CO2校准时，请确保放入室外或此时CO2浓度足够低
 
 ## 成果展示
