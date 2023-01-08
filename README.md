@@ -30,6 +30,7 @@
 ## 参考链接
 - [CO2 cm1106库文件](https://github.com/LeoDJ/ESPHome_Nodes)
 - [感谢奋斗大佬的PM2005(PM2105)库文件，以及各种证件照](https://github.com/nixieclock)
+- [需要污染等级以及PM1.0和PM10数据的可以用MiWyf大佬的PM2005(PM2105)库文件](https://github.com/miwyf/pm2105)
 
 ## 交流
 - QQ群：[198841186](https://jq.qq.com/?_wv=1027&k=lZAMn5Uo)
