@@ -40,6 +40,7 @@
 
 
 ## 赏赞
-如果帮助到了您，不妨请俺喝杯奶茶。
+- [对刷机不了解的也可以直接购买成品](https://m.tb.cn/h.UPvmbi9?tk=PwFddUMFVw2)
+- 如果教程帮助到了您，不妨请俺喝杯奶茶。
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/wechat.jpg" width="200"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/alipay.jpg" width="200">
