@@ -1,4 +1,4 @@
-## [大金空气传感器]([http://daikin.shuishushi.com/product/237.html](https://mp.weixin.qq.com/s/d5tm4ObWZfIJkB5_18t_uA))
+## [大金空气传感器](https://mp.weixin.qq.com/s/d5tm4ObWZfIJkB5_18t_uA)
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/BRY88AB151K.png" width="350">
 
 ## 拆机以及烧录
