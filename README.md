@@ -19,7 +19,7 @@
 - 注意侧面USB扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机
 - 进入BOOT后PCB板上的LED灯不亮
 - 无法烧录可尝试一直短接GPIO0或对调RXD TXD针脚，或重新插拔USB转TTL刷机板
-- 若没有编译环境，可直接使用编译好的固件daikin-air-sensor-factory.bin，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
+- 若没有编译环境，可直接使用编译好的固件daikin-air-sensor.bin，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
 - CO2传感器启动会需要一小段时间，启动期间数值为550ppm
 - 进行CO2校准时，请确保放入室外或此时CO2浓度足够低
 
