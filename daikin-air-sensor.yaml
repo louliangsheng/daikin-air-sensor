@@ -2,7 +2,8 @@ esphome:
   name: daikin-air-sensor
   project:
     name: "DAIKIN.BRY88AB151K"
-    version: "BRY88AB151K"
+    version: "PM2105" #根据自己PM2.5传感器型号选择，方便后续OTA查找文件
+    #version: "PM2105"
   # name_add_mac_suffix: true
   includes:
     - "cm1106.h"
