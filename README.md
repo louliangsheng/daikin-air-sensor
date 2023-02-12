@@ -15,13 +15,13 @@
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E7%83%A7%E5%BD%95%E6%8E%A5%E5%8F%A3.jpg" width="450">
 
 注意:
-- 
 - 注意侧面USB扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机
 - 进入BOOT后PCB板上的LED灯不亮
 - 无法烧录可尝试一直短接GPIO0或对调RXD TXD针脚，或重新插拔USB转TTL刷机板
 - 若没有编译环境，可直接使用编译好的固件daikin-air-sensor-factory.bin，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
 - CO2传感器启动会需要一小段时间，启动期间数值为550ppm
 - 进行CO2校准时，请确保放入室外或此时CO2浓度足够低
+- 大金空气传感器还有BRY88AA151K版本，不带甲醛扩展版本，两版本固件不通用，建议谨慎购买
 
 ## 成果展示
 
