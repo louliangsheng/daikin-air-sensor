@@ -21,8 +21,7 @@
 - 若没有编译环境，可直接使用编译好的固件daikin-air-sensor-factory.bin，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
 - CO2传感器启动会需要一小段时间，启动期间数值为550ppm
 - 进行CO2校准时，请确保放入室外或此时CO2浓度足够低
-- 大金空气传感器还有BRY88AA151K版本，不带甲醛扩展版本，两版本固件不通用，建议谨慎购买
-
+- 大金空气传感器还有BRY88AA151K版本，不带甲醛扩展版本，两版本刷机方式以及传感器io不同，后续不进行DIY的话，使用无差别。
 ## 成果展示
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/Achievements.png" width="450">
