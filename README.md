@@ -1,5 +1,5 @@
 ## 大金空气传感器
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.png" width="240">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.jpg" width="240">
 
 - 图上为BRY88AB151K版本，不带甲醛字样的为BRY88AA151K版本
 
