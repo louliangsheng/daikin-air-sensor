@@ -19,7 +19,7 @@
 注意:
 - 注意BRY88AB151K版甲醛扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机；BRY88AA151K版不带甲醛扩展
 - 进入BOOT后PCB板上的LED灯不亮，若无法烧录可尝试重新上电、一直短接GPIO0、对调RXD TXD针脚或重新插拔USB转TTL刷机板
-- 若没有编译环境，可直接使用编译好的固件daikin-air-sensor-factory.bin，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
+- 若没有编译环境，可直接使用firmware文件夹中编译好的factory固件刷写，刷写完成后上电连接DAIKIN Fallback Hotspot热点进行配网
 - CO2传感器启动会需要一小段时间，启动期间数值为550ppm，进行CO2校准时，请确保放入室外或此时CO2浓度足够低
 ## 成果展示
 
