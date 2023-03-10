@@ -1,5 +1,5 @@
 ## 大金空气传感器
-下图为BRY88AB151K版，其甲醛扩展侧盖不能硬撬，是侧滑打开的；不带甲醛字样的为BRY88AA151K版，不支持甲醛扩展
+下图为BRY88AB151K版，其右上为甲醛扩展侧盖，向后滑动打开；不带甲醛字样的为BRY88AA151K版，不支持甲醛扩展
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.jpg" width="240">
 
