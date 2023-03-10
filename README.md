@@ -1,5 +1,7 @@
-## [大金空气传感器](https://mp.weixin.qq.com/s/d5tm4ObWZfIJkB5_18t_uA)
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AA151K.png" width="350">
+## 大金空气传感器
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.png" width="240">
+
+- 图上为BRY88AB151K版本，不带甲醛字样的为BRY88AA151K版本
 
 ## 拆机以及烧录
 1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
