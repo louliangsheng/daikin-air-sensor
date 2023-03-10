@@ -27,9 +27,9 @@
 
 ## 参考链接
 - 感谢C佬的[视频教程](https://www.bilibili.com/video/BV1PY4y1y7sE)
-- [CO2 cm1106库文件](https://github.com/LeoDJ/ESPHome_Nodes)
-- 感谢[奋斗大佬](https://github.com/nixieclock)的PM2.5 Header文件以及各种证件照
-- 需要加装[ze08](https://github.com/miwyf/ze08-ch2o-esphome)甲醛的可以用MiWyf大佬的Header文件
+- [CM1106二氧化碳传感器](http://www.gassensor.com.cn/CO2Sensor/info_itemid_94.html) [Header文件](https://github.com/LeoDJ/ESPHome_Nodes)
+- 感谢[奋斗大佬](https://github.com/nixieclock)的[PM2.5传感器](http://www.gassensor.com.cn/ParticulateSensor/info_itemid_104.html) Header文件以及各种证件照
+- 需要加装[ZE08-CH20传感器](http://style.winsensor.com/pro_pdf/ZE08-CH2O.pdf)的可以用MiWyf大佬的[Header文件](https://github.com/miwyf/ze08-ch2o-esphome)
 ## 交流
 - QQ群：[198841186](https://jq.qq.com/?_wv=1027&k=lZAMn5Uo)
 - 微信群：
