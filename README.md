@@ -24,7 +24,7 @@
 - 大金空气传感器还有BRY88AA151K版本，不带甲醛扩展版本，两版本刷机方式以及传感器io不同，后续不进行DIY的话，使用无差别。
 ## 成果展示
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/Achievements.png" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/achievements.png" width="450">
 
 ## 参考链接
 - [CO2 cm1106库文件](https://github.com/LeoDJ/ESPHome_Nodes)
