@@ -4,15 +4,15 @@
 ## 拆机以及烧录
 1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E6%8B%86%E6%9C%BA.jpg" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/dismantle.jpg" width="450">
 
 2.将cm1106.h和pm2005.h(或pm2105.h，根据PM2.5传感器型号选择)放入ESPHome配置文件夹中，使用daikin-air-sensor.yaml编译固件。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/PM2.5.jpg" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/PM2.5.jpg" width="450">
 
 3.短接图片中GPIO0两个针脚（其中一个为GND），短接后上电即可进入BOOT刷写模式，然后将图片中的RXD TXD GND连接到USB转TTL刷机板的TX RX GND上，USB插到电脑上，进入[WEB ESPHome](https://web.esphome.io/) 烧录固件。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/%E7%83%A7%E5%BD%95%E6%8E%A5%E5%8F%A3.jpg" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/replication.jpg" width="450">
 
 注意:
 - 注意侧面USB扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机
@@ -24,7 +24,7 @@
 - 大金空气传感器还有BRY88AA151K版本，不带甲醛扩展版本，两版本刷机方式以及传感器io不同，后续不进行DIY的话，使用无差别。
 ## 成果展示
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/Achievements.png" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/Achievements.png" width="450">
 
 ## 参考链接
 - [CO2 cm1106库文件](https://github.com/LeoDJ/ESPHome_Nodes)
@@ -42,4 +42,4 @@
 - [对刷机不了解的也可以直接购买成品](https://m.tb.cn/h.UpkczuX?tk=OvhBdiaatqy)
 - 如果教程帮助到了您，不妨请俺喝杯奶茶。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/wechat.jpg" width="200"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/alipay.jpg" width="200">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/wechat.jpg" width="200"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/image/main/alipay.jpg" width="200">
