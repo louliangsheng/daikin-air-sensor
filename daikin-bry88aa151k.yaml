@@ -1,0 +1,182 @@
+esphome:
+  name: "daikin-air-sensor"
+  project:
+    name: "DAIKIN.BRY88AA151K"
+    version: "PM2005"
+  name_add_mac_suffix: true
+  includes:
+    - "cm1106.h"
+    - "pm2005.h"
+
+esp32:
+  board: nodemcu-32s
+
+wifi:
+  ssid: 'L'
+  password: '1234567890'
+  ap:
+    ssid: "DAIKIN Fallback Hotspot"
+
+captive_portal:
+
+api:
+
+ota:
+
+web_server:
+  port: 80
+
+logger:
+
+uart:
+- id: cm1106_uart
+  rx_pin: 16
+  tx_pin: 17
+  baud_rate: 9600
+
+i2c:
+- id: PM25_bus
+  sda: 23
+  scl: 22
+  scan: true
+
+sensor:
+- platform: custom
+  lambda: |-
+    auto cm1106Sensor = new CM1106Sensor(id(cm1106_uart), 10000);
+    App.register_component(cm1106Sensor);
+    return {cm1106Sensor};
+  sensors:
+  - name: "DAIKIN CO2 Sensor"
+    id: co2sensor
+    accuracy_decimals: 0
+    unit_of_measurement: "ppm"
+    device_class: carbon_dioxide
+    on_value_range:
+      - below: 1000
+        then:
+          - switch.turn_off: co2led
+      - above: 1000
+        then:
+          - switch.turn_on: co2led
+- platform: custom
+  lambda: |-
+    auto pm25 = new pm2005();
+    App.register_component(pm25);
+    return {pm25};
+  sensors:
+  - name: "DAIKIN PM2.5 Sensor "
+    unit_of_measurement: μg/m³
+    accuracy_decimals: 0
+    device_class: pm25
+    on_value_range:
+      - below: 50
+        then:
+          - switch.turn_off: pm25led
+      - above: 50
+        then:
+          - switch.turn_on: pm25led
+- platform: adc
+  pin: GPIO34
+  attenuation: auto
+  name: "DAIKIN TVOC Sensor"
+  device_class: volatile_organic_compounds
+  unit_of_measurement: μg/m³
+  filters:
+    - calibrate_linear:
+      - 1.2 -> 10
+      - 1.5 -> 1000
+      - 1.6 -> 3000
+    - lambda: |-
+        if (x > 5000) {
+          return 5000;
+        } else if (x < 10) {
+          return 10;
+        }
+        return x;
+  accuracy_decimals: 0
+  update_interval: 30s
+  on_value_range:
+    - below: 1000
+      then:
+        - switch.turn_off: tvocled
+    - above: 1000
+      then:
+        - switch.turn_on: tvocled
+- platform: hdc1080
+  temperature:
+    name: "DAIKIN Temperature Sensor"
+    filters:
+      - offset: -2.0
+  humidity:
+    name: "DAIKIN Humidity Sensor"
+    filters:
+      - offset: 2.0
+  update_interval: 30s
+- platform: wifi_signal
+  name: "DAIKIN Signal"
+  update_interval: 60s
+
+switch:
+- platform: custom
+  lambda: |-
+    auto cm1106Calib = new CM1106CalibrateSwitch(id(cm1106_uart));
+    App.register_component(cm1106Calib);
+    return {cm1106Calib};
+  switches:
+  - id: calibration
+    internal: true
+- platform: gpio
+  pin: 5
+  id: co2led
+  icon: mdi:led-off
+  name: "DAIKIN CO2 LED"
+- platform: gpio
+  pin: 32
+  id: tvocled
+  icon: mdi:led-off
+  name: "DAIKIN TVOC LED"
+- platform: gpio
+  pin: 33
+  id: pm25led
+  icon: mdi:led-off
+  name: "DAIKIN PM2.5 LED"
+
+status_led:
+  pin: 25
+
+button:
+- platform: restart
+  name: "DAIKIN Restart"
+- platform: template
+  name: "DAIKIN CO2 Calibration"
+  on_press:
+    then:
+      - switch.turn_on: calibration
+
+binary_sensor:
+- platform: gpio
+  pin: 19
+  id: RESET
+  internal: true
+  on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm并关闭CO2指示灯
+    then:
+      - switch.turn_on: co2led
+      - delay: 5min #可自定义修改时间
+      - switch.turn_on: calibration
+      - delay: 10s
+      - switch.turn_off: co2led
+- platform: template
+  internal: true
+  id: co2_calibration #CO2持续400ppm并保持5分钟会自动校准
+  lambda: |-
+    if (id(co2sensor).state == 400) {
+      return true;
+    } else {
+      return false;
+    }
+  filters:
+    - delayed_on: 5min
+  on_press:
+    then:
+      - switch.turn_on: calibration
