@@ -6,15 +6,15 @@
 ## 拆机以及烧录
 1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/dismantle.jpg" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/dismantle.jpg" width="500">
 
 2.将header文件夹中的cm1106.h和pm2005.h(或pm2105.h，根据PM2.5传感器型号选择)放入ESPHome配置文件夹中，根据传感器型号使用相应yaml编译固件。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/PM2.5.jpg" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/PM2.5.jpg" width="500">
 
-3.BRY88AB151K版为短接图片中GPIO0两个针脚（其中一个为GND），短接后上电即可进入BOOT刷写模式，然后将图片中的RXD TXD GND连接到USB转TTL刷机板的TX RX GND上，USB插到电脑上，进入[WEB ESPHome](https://web.esphome.io/) 烧录固件；BRY88AA151K版刷机原理相同，但是PCB板上貌似没有专门刷机孔，需要自己从芯片引出。
+3.BRY88AB151K版为短接图片中GPIO0两个针脚（其中一个为GND），短接后上电即可进入BOOT刷写模式，然后将图片中的RXD TXD GND连接到USB转TTL刷机板的TX RX GND上，USB插到电脑上，进入[WEB ESPHome](https://web.esphome.io/) 烧录固件；BRY88AA151K版刷机原理相同，但是PCB板上貌似没有专门刷机孔，需要短接GPIO0和GND进步BOOT后通过芯片U0RXTX刷写。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/replication.jpg" width="450">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/replication.jpg" width="410"><img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png" width="590">
 
 注意:
 - 注意BRY88AB151K版甲醛扩展侧盖不能硬撬，是侧滑打开的，且其RX TX不能用于刷机；BRY88AA151K版不带甲醛扩展
