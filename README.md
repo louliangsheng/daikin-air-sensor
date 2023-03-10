@@ -44,4 +44,4 @@
 - [对刷机不了解的也可以直接购买成品](https://m.tb.cn/h.UpkczuX?tk=OvhBdiaatqy)
 - 如果教程帮助到了您，不妨请俺喝杯奶茶。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/wechat.jpg" width="200"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/image/main/image/alipay.jpg" width="200">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/wechat.jpg" width="200"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/alipay.jpg" width="200">
