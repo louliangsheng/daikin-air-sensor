@@ -1,7 +1,7 @@
 ## 大金空气传感器
 下图为BRY88AB151K版，其右上为甲醛扩展侧盖，向后滑动打开；不带甲醛字样的为BRY88AA151K版，不支持甲醛扩展
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.jpg" width="240">
+<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.jpg" width="240"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/achievements.png" width="450">
 
 ## 拆机以及烧录
 1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
@@ -17,10 +17,6 @@
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/replication.jpg" width="320"><img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png" width="450">
 
 4.刷写完成后重新上电，连接DAIKIN Fallback Hotspot热点进行配网，CO2传感器启动会需要一小段时间，启动期间数值为550ppm；在进行CO2校准时，请确保放入室外或此时CO2浓度足够低。
-## 成果展示
-
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/achievements.png" width="450">
-
 ## 参考链接
 - 感谢C佬的[视频教程](https://www.bilibili.com/video/BV1PY4y1y7sE)
 - [CM1106二氧化碳传感器](http://www.gassensor.com.cn/CO2Sensor/info_itemid_94.html) [Header文件](https://github.com/LeoDJ/ESPHome_Nodes)
@@ -31,7 +27,6 @@
 - 微信群：
 
   <img src="https://user-images.githubusercontent.com/4549099/161735971-0540ce1c-eb49-4aff-8cb3-3bdad15e22f7.png" alt="xiaomi miot weixin group" width="100">
-
 
 ## 赏赞
 - [不想刷机的老板可以直接购买俺刷好的成品](https://m.tb.cn/h.UpkczuX?tk=OvhBdiaatqy)
