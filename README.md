@@ -26,10 +26,10 @@
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/achievements.png" width="450">
 
 ## 参考链接
+- 感谢C佬的[视频教程](https://www.bilibili.com/video/BV1PY4y1y7sE)
 - [CO2 cm1106库文件](https://github.com/LeoDJ/ESPHome_Nodes)
-- 感谢[奋斗大佬](https://github.com/nixieclock)的PM2005(PM2105)库文件，以及各种证件照，还有[更详细的刷机教程](https://hasstech.cn/?p=1)
-- [需要污染等级以及PM1.0和PM10数据的可以用MiWyf大佬的PM2005(PM2105)库文件](https://github.com/miwyf/pm2105)
-
+- 感谢[奋斗大佬](https://github.com/nixieclock)的PM2.5 Header文件以及各种证件照
+- 需要加装[ze08](https://github.com/miwyf/ze08-ch2o-esphome)甲醛的可以用MiWyf大佬的Header文件
 ## 交流
 - QQ群：[198841186](https://jq.qq.com/?_wv=1027&k=lZAMn5Uo)
 - 微信群：
