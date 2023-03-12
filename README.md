@@ -1,8 +1,7 @@
 ## 大金空气传感器
 下图为BRY88AB151K版，其右上为甲醛扩展侧盖，向后滑动打开；不带甲醛字样的为BRY88AA151K版，不支持甲醛扩展
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.jpg" width="240"><img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/achievements.png" width="450">
-
+<img src="https://hasstech.cn/wp-content/uploads/2023/01/IMG_0468.jpg" width="500">
 ## 拆机以及烧录
 1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
 
@@ -10,11 +9,11 @@
 
 2.将header文件夹中的pm2005.h、pm2105.h和cm1106.h放入ESPHome配置文件夹中，根据传感器型号使用相应yaml编译固件，若没有编译环境，可直接使用firmware文件夹中编译好的factory固件刷写。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/PM2.5.jpg" width="500">
+<img src="https://hasstech.cn/wp-content/uploads/2023/01/ss_pm2.5.jpg" width="500">
 
 3.BRY88AB151K版为短接图片中GPIO0两个针脚（其中一个为GND），短接后上电即可进入BOOT刷写模式，然后将图片中的RXD TXD GND连接到USB转TTL刷机板的TX RX GND上，USB插到电脑上，进入[WEB ESPHome](https://web.esphome.io/) 烧录固件；BRY88AA151K版刷机原理相同，但是PCB板上貌似没有专门刷机孔，需要短接GPIO0和GND进入BOOT后通过芯片U0 RXTX刷写；进入BOOT后PCB板上的LED灯不亮，若无法烧录可尝试对调RXD TXD针脚或一直短接GPIO0/GND并重新上电。
 
-<img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/replication.jpg" width="320"><img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png" width="450">
+<img src="https://hasstech.cn/wp-content/uploads/2023/01/mainboard.jpg" width="350"><img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png" width="430">
 
 4.刷写完成后重新上电，连接DAIKIN Fallback Hotspot热点进行配网，CO2传感器启动需要大概3分钟，启动期间数值为550ppm；在进行CO2校准时，请确保放入室外或此时CO2浓度足够低。
 ## 参考链接
