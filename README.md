@@ -2,6 +2,7 @@
 下图为BRY88AB151K版，其右上为甲醛扩展侧盖，向后滑动打开；不带甲醛字样的为BRY88AA151K版，不支持甲醛扩展
 
 <img src="https://hasstech.cn/wp-content/uploads/2023/01/IMG_0468.jpg" width="500">
+
 ## 拆机以及烧录
 1.按照图片位置拆下带指示灯的一面，都是卡扣结构，拆开后取出PCB板。
 
