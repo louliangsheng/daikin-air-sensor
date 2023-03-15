@@ -84,12 +84,7 @@ sensor:
   unit_of_measurement: μg/m³
   accuracy_decimals: 0
   filters:
-    - lambda: |-
-        return exp(4.7 * x);
-        if (x > 5000) {
-          return 5000;
-        } 
-        return x;
+    - lambda: return exp(5 * x);
   on_value_range:
     - below: 1000
       then:
