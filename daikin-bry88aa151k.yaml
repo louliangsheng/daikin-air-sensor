@@ -82,20 +82,14 @@ sensor:
   name: "DAIKIN TVOC Sensor"
   device_class: volatile_organic_compounds
   unit_of_measurement: μg/m³
+  accuracy_decimals: 0
   filters:
-    - calibrate_linear:
-      - 1.2 -> 10
-      - 1.5 -> 1000
-      - 1.6 -> 3000
     - lambda: |-
+        return exp(4.7 * x);
         if (x > 5000) {
           return 5000;
-        } else if (x < 10) {
-          return 10;
-        }
+        } 
         return x;
-  accuracy_decimals: 0
-  update_interval: 30s
   on_value_range:
     - below: 1000
       then:
