@@ -99,8 +99,8 @@ sensor:
           min_value = x;
         }
         float diff = x - min_value;
-        if (diff < 0.2) {
-          return diff * 450 + 10;
+        if (diff < 0.3) {
+          return diff * 1800 + 10;
         } else {
           return diff * 4500 - 800;
         }
