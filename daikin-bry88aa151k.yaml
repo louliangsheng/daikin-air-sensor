@@ -17,6 +17,12 @@ wifi:
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
+# wifi:
+#   ssid: 'iot_1'
+#   password: 'Akiyama730'
+#   ap:
+#     ssid: "DAIKIN Fallback Hotspot"
+
 captive_portal:
 
 api:
@@ -35,7 +41,7 @@ uart:
   baud_rate: 9600
 
 i2c:
-- id: PM25_bus
+- id: pm25_bus
   sda: 23
   scl: 22
   scan: true
@@ -77,14 +83,33 @@ sensor:
         then:
           - switch.turn_on: pm25led
 - platform: adc
-  pin: GPIO34
+  pin: 34
+  attenuation: auto
+  name: "DAIKIN TVOC ADC"
+- platform: adc
+  pin: 34
   attenuation: auto
   name: "DAIKIN TVOC Sensor"
   device_class: volatile_organic_compounds
   unit_of_measurement: μg/m³
   accuracy_decimals: 0
+  update_interval: 10s
   filters:
-    - lambda: return exp(5 * x);
+    - median:
+        window_size: 7
+        send_every: 4
+        send_first_at: 3
+    - lambda: |-
+        static float min_value = x;
+        if (x < min_value) {
+          min_value = x;
+        }
+        float diff = x - min_value;
+        if (diff < 0.2) {
+          return diff * 450 + 10;
+        } else {
+          return diff * 4500 - 800;
+        }
   on_value_range:
     - below: 1000
       then:
@@ -101,10 +126,9 @@ sensor:
     name: "DAIKIN Humidity Sensor"
     filters:
       - offset: 2.0
-  update_interval: 30s
+  update_interval: 10s
 - platform: wifi_signal
   name: "DAIKIN Signal"
-  update_interval: 60s
 
 switch:
 - platform: custom
@@ -144,17 +168,6 @@ button:
       - switch.turn_on: calibration
 
 binary_sensor:
-- platform: gpio
-  pin: 19
-  id: RESET
-  internal: true
-  on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm并关闭CO2指示灯
-    then:
-      - switch.turn_on: co2led
-      - delay: 5min #可自定义修改时间
-      - switch.turn_on: calibration
-      - delay: 10s
-      - switch.turn_off: co2led
 - platform: template
   internal: true
   id: co2_calibration #CO2持续400ppm并保持5分钟会自动校准
@@ -169,3 +182,14 @@ binary_sensor:
   on_press:
     then:
       - switch.turn_on: calibration
+# - platform: gpio
+#   pin: 19
+#   id: RESET
+#   internal: true
+#   on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm并关闭CO2指示灯
+#     then:
+#       - switch.turn_on: co2led
+#       - delay: 5min #可自定义修改时间
+#       - switch.turn_on: calibration
+#       - delay: 10s
+#       - switch.turn_off: co2led
