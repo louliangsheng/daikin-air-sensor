@@ -17,12 +17,6 @@ wifi:
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
-# wifi:
-#   ssid: 'iot_1'
-#   password: 'Akiyama730'
-#   ap:
-#     ssid: "DAIKIN Fallback Hotspot"
-
 captive_portal:
 
 api:
