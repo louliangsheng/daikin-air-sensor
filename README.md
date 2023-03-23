@@ -17,11 +17,16 @@
 <img src="https://hasstech.cn/wp-content/uploads/2023/01/mainboard.jpg" width="350"><img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png" width="430">
 
 4.刷写完成后重新上电，连接DAIKIN Fallback Hotspot热点进行配网，CO2传感器启动需要大概3分钟，启动期间数值为550ppm；在进行CO2校准时，请确保放入室外或此时CO2浓度足够低。
+
+5.已经确定原装甲醛模块为炜盛[ZE08-CH20](http://style.winsensor.com/pro_pdf/ZE08-CH2O.pdf)传感器，安装原装甲醛模块后下载firmware/ota文件夹中ch2o.bin固件进入WEB ota升级即可。
+
+<img src="https://mmbiz.qpic.cn/mmbiz_png/HhGBahfz4QZ6IMPibRCbowicxMjSgsZNiaCX7C6A6RgkyOuGIbDl0eCWA5cjsypn0RPjo7rjbAhqvtTxANthGQZmw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" width="450">
+
 ## 参考链接
 - 感谢C佬的[视频教程](https://www.bilibili.com/video/BV1PY4y1y7sE)
 - [CM1106二氧化碳传感器](http://www.gassensor.com.cn/CO2Sensor/info_itemid_94.html) [Header文件](https://github.com/LeoDJ/ESPHome_Nodes)
 - 感谢[严泽远](https://github.com/nixieclock)大佬的[PM2.5传感器](http://www.gassensor.com.cn/ParticulateSensor/info_itemid_104.html) Header文件以及各种证件照
-- 需要加装[ZE08-CH20传感器](http://style.winsensor.com/pro_pdf/ZE08-CH2O.pdf)的可以用MiWyf大佬的[Header文件](https://github.com/miwyf/ze08-ch2o-esphome)
+- 感谢MiWyf大佬的甲醛传感器[Header文件](https://github.com/miwyf/ze08-ch2o-esphome)
 ## 交流
 - QQ群：[198841186](https://jq.qq.com/?_wv=1027&k=lZAMn5Uo)
 - 微信群：
@@ -29,7 +34,7 @@
   <img src="https://user-images.githubusercontent.com/4549099/161735971-0540ce1c-eb49-4aff-8cb3-3bdad15e22f7.png" alt="xiaomi miot weixin group" width="100">
 
 ## 赏赞
-- [不想刷机的老板可以直接购买俺刷好的成品](https://m.tb.cn/h.UpkczuX?tk=OvhBdiaatqy)
+- [不想刷机的老板可以直接购买俺刷好的成品，加装的甲醛模块为原装甲醛模块同款](https://m.tb.cn/h.UpkczuX?tk=OvhBdiaatqy)
 - 如果教程帮助到了您，不妨请俺喝杯奶茶
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/wechat.jpg" width="200">
