@@ -102,14 +102,13 @@ sensor:
     filters:
       - median:
           window_size: 7
-          send_every: 5
-          send_first_at: 3
-      # - lambda: |-
-      #     if (x > 10000) {
-      #       return 10000;
-      #     } else {
-      #     return x;
-      #     }
+          send_every: 10
+      - lambda: |-
+          if (x > 10000) {
+            return 10000;
+          } else {
+          return x;
+          }
     on_value_range:
       - below: 3000       
         then:
