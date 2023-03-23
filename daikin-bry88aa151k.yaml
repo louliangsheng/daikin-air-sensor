@@ -17,6 +17,12 @@ wifi:
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
+# wifi:
+#   ssid: 'iot_1'
+#   password: 'Akiyama730'
+#   ap:
+#     ssid: "DAIKIN Fallback Hotspot"
+
 captive_portal:
 
 api:
@@ -94,15 +100,15 @@ sensor:
         send_every: 4
         send_first_at: 3
     - lambda: |-
-        static float min_value = x;
+        static float min_value = x;//后续可将x值改成TVOC ADC中历史最低值
         if (x < min_value) {
           min_value = x;
         }
         float diff = x - min_value;
-        if (diff < 0.3) {
-          return diff * 1800 + 10;
+        if (diff < 0.4) {
+          return diff * 3700 + 20;
         } else {
-          return diff * 4500 - 800;
+          return diff * 5000 - 500;
         }
   on_value_range:
     - below: 1000
@@ -115,11 +121,11 @@ sensor:
   temperature:
     name: "DAIKIN Temperature Sensor"
     filters:
-      - offset: -2.0
+      - offset: -1.0
   humidity:
     name: "DAIKIN Humidity Sensor"
     filters:
-      - offset: 2.0
+      - offset: 0.0
   update_interval: 10s
 - platform: wifi_signal
   name: "DAIKIN Signal"
