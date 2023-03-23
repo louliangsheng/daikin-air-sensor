@@ -80,6 +80,12 @@ sensor:
   pin: 34
   attenuation: auto
   name: "DAIKIN TVOC ADC"
+  update_interval: 30s
+  filters:
+    - median:
+        window_size: 7
+        send_every: 2
+        send_first_at: 2
 - platform: adc
   pin: 34
   attenuation: auto
@@ -91,7 +97,7 @@ sensor:
   filters:
     - median:
         window_size: 7
-        send_every: 4
+        send_every: 3
         send_first_at: 3
     - lambda: |-
         static float min_value = x;//后续可将x值改成TVOC ADC中历史最低值
