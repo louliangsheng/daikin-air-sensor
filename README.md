@@ -34,7 +34,7 @@
   <img src="https://user-images.githubusercontent.com/4549099/161735971-0540ce1c-eb49-4aff-8cb3-3bdad15e22f7.png" alt="xiaomi miot weixin group" width="100">
 
 ## 赏赞
-- [不想刷机的老板可以直接购买俺刷好的成品，加装的甲醛模块为原装甲醛模块同款](https://m.tb.cn/h.UpkczuX?tk=OvhBdiaatqy)
+- 不想刷机的老板可以咸鱼搜索[玩智能的小菜](https://m.tb.cn/h.UroFNjM?tk=KkOod9pTVWg)，直接购买俺刷好的成品，加装的甲醛模块为原装甲醛模块同款
 - 如果教程帮助到了您，不妨请俺喝杯奶茶
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/wechat.jpg" width="200">
