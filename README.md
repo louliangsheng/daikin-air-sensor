@@ -8,7 +8,7 @@
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/dismantle.jpg" width="500">
 
-2.将header文件夹中的pm2005.h、pm2105.h和cm1106.h放入ESPHome配置文件夹中，根据传感器型号使用相应yaml编译固件，若没有编译环境，可直接使用firmware文件夹中编译好的factory固件刷写。
+2.将header文件夹中的pm2005.h、pm2105.h、cm1106.h和ze08-ch2o.h放入ESPHome配置文件夹中，根据传感器型号编译固件，若没有编译环境，可直接使用firmware文件夹中编译好的factory固件刷写。
 
 <img src="https://hasstech.cn/wp-content/uploads/2023/01/ss_pm2.5.jpg" width="500">
 
