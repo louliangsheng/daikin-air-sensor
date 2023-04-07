@@ -28,6 +28,11 @@ web_server:
 
 logger:
 
+# bluetooth_proxy:  #需要蓝牙代理功能可以打开
+#   active: true
+
+# esp32_ble_tracker:
+
 uart:
 - id: cm1106_uart
   rx_pin: 16
