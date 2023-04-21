@@ -100,11 +100,7 @@ sensor:
           min_value = x;
         }
         float diff = x - min_value;
-        if (diff < 0.4) {
-          return diff * 3700 + 20;
-        } else {
-          return diff * 5000 - 500;
-        }
+        return diff * 5000 + 1;
   on_value_range:
     - below: 1000
       then:
