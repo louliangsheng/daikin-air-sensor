@@ -2,13 +2,13 @@ esphome:
   name: daikin-air-sensor
   project:
     name: "DAIKIN.BRY88AB151K"
-    version: "PM2105" #根据自己PM2.5传感器型号选择，方便后续OTA查找文件
-    # version: "PM2005"
+    # version: "PM2105" #根据自己PM2.5传感器型号选择，方便后续OTA查找文件
+    version: "PM2005"
   name_add_mac_suffix: true
   includes:
     - "cm1106.h"
-    - "pm2105.h"  #拆机根据自己PM2.5传感器型号选择对应的文件
-    # - "pm2005.h"
+    # - "pm2105.h"  #拆机根据自己PM2.5传感器型号选择对应的文件
+    - "pm2005.h"
 
 esp32:
   board: nodemcu-32s
@@ -40,10 +40,6 @@ uart:
   rx_pin: 16
   tx_pin: 17
   baud_rate: 9600
-# - id: expand_uart  #侧面USB串口，连接其他传感器时可以打开，无法驱动可以调换RXTX顺序
-#   tx_pin: 5
-#   rx_pin: 18
-#   baud_rate: 9600
 
 i2c:
 - id: pm25_bus
@@ -104,21 +100,15 @@ sensor:
     filters:
       - multiply: 4 #系数在3-4.5之间
       - median:
-          window_size: 7
+          window_size: 3
           send_every: 10
-      - lambda: |-
-          if (x > 10000) {
-            return 10000;
-          } else {
-          return x;
-          }
     on_value_range:
       - below: 3000       
         then:
-          - switch.turn_off: tvocled
+          - switch.turn_off: tvocch2oled
       - above: 3000
         then:
-          - switch.turn_on: tvocled
+          - switch.turn_on: tvocch2oled
   compensation:
     temperature_source: temperature
     humidity_source: humidity
@@ -135,7 +125,7 @@ sensor:
   humidity:
     name: "DAIKIN Humidity Sensor"
     filters:
-      - offset: 10.0
+      - offset: 15.0
     id: humidity
   update_interval: 10s
 - platform: wifi_signal
@@ -157,9 +147,9 @@ switch:
   name: "DAIKIN CO2 LED"
 - platform: gpio
   pin: 32
-  id: tvocled
+  id: tvocch2oled
   icon: mdi:led-off
-  name: "DAIKIN TVOC LED"
+  name: "DAIKIN TVOC/CH2O LED"
 - platform: gpio
   pin: 33
   id: pm25led
@@ -194,7 +184,7 @@ binary_sensor:
     then:
       - switch.turn_on: calibration
 # - platform: gpio
-#   pin: GPIO34
+#   pin: 34
 #   id: RESET
 #   internal: true
 #   on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm并关闭CO2指示灯
