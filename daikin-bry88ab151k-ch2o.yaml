@@ -115,7 +115,7 @@ sensor:
     unit_of_measurement: μg/m³
     accuracy_decimals: 0
     filters:
-      - multiply: 4
+      - multiply: 4 #系数在3-4.5之间
       - median:
           window_size: 3
           send_every: 10
