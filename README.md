@@ -25,7 +25,7 @@
 - [CM1106二氧化碳传感器](http://www.gassensor.com.cn/CO2Sensor/info_itemid_94.html) [Header文件](https://github.com/LeoDJ/ESPHome_Nodes)
 
 ## 购买链接
-不想刷机的老板可以咸鱼搜索[玩智能的小菜](https://m.tb.cn/h.UroFNjM?tk=KkOod9pTVWg)，直接购买俺刷好的成品，已加装甲醛模块
+不想刷机的老板可以咸鱼搜索[玩智能的小菜](https://m.tb.cn/h.UvVG2Vt?tk=ussydN8ptpK)，直接购买俺刷好的成品，已加装甲醛模块
 
 ## 交流
 - QQ群：[198841186](https://jq.qq.com/?_wv=1027&k=lZAMn5Uo)
