@@ -98,9 +98,8 @@ sensor:
     unit_of_measurement: μg/m³
     accuracy_decimals: 0
     filters:
-      - multiply: 4 #系数在3-4.5之间
+      - multiply: 3 #系数在2-4.5之间
       - median:
-          window_size: 3
           send_every: 10
     on_value_range:
       - below: 3000       
@@ -164,6 +163,7 @@ button:
   name: "DAIKIN Restart"
 - platform: template
   name: "DAIKIN CO2 Calibration" #按下后会将当前环境CO2浓度设置为基准400ppm，按下时请确保放入室外或此时CO2浓度足够低
+  entity_category: "config"
   on_press:
     then:
       - switch.turn_on: calibration
