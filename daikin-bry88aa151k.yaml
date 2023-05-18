@@ -110,7 +110,7 @@ sensor:
   temperature:
     name: "DAIKIN Temperature Sensor"
     filters:
-      - offset: -1.0
+      - offset: -2.0
   humidity:
     name: "DAIKIN Humidity Sensor"
     filters:
