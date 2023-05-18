@@ -183,7 +183,7 @@ binary_sensor:
   internal: true
   id: indicator
   lambda: |-
-    if (id(ze08_ch2o).state < 100 && id(sgp30_tvoc).state < 3000) {
+    if (id(ze08_ch2o).state < 100 && id(sgp30_tvoc).state < 1000) {
       return true;
     } else {
       return false;
