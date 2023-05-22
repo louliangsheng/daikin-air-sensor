@@ -30,6 +30,9 @@ web_server:
   port: 80
 
 logger:
+  logs:
+    sgp30: WARN
+    sensor: WARN
 
 # bluetooth_proxy:  #需要蓝牙代理功能可以打开
 #   active: true
@@ -76,16 +79,8 @@ sensor:
   sensors:
   - name: "DAIKIN CO2 Sensor"
     id: co2sensor
-    accuracy_decimals: 0
-    unit_of_measurement: "ppm"
     device_class: carbon_dioxide
-    on_value_range:
-      - below: 1000
-        then:
-          - switch.turn_off: co2led
-      - above: 1000
-        then:
-          - switch.turn_on: co2led
+    unit_of_measurement: "ppm"
 - platform: custom
   lambda: |-
     auto pm25 = new pm2005();
@@ -93,107 +88,176 @@ sensor:
     return {pm25};
   sensors:
   - name: "DAIKIN PM2.5 Sensor"
-    unit_of_measurement: μg/m³
-    accuracy_decimals: 0
+    id: pm25sensor
     device_class: pm25
-    on_value_range:
-      - below: 50
-        then:
-          - switch.turn_off: pm25led
-      - above: 50
-        then:
-          - switch.turn_on: pm25led
+    unit_of_measurement: μg/m³
 - platform: sgp30
   i2c_id: th_bus
+  compensation:
+    temperature_source: temperature
+    humidity_source: humidity
   eco2:
     name: "DAIKIN eCO2 Sensor"
     internal: true
   tvoc:
     name: "DAIKIN TVOC Sensor"
-    id: sgp30_tvoc
+    id: tvocsensor
     device_class: volatile_organic_compounds
     unit_of_measurement: μg/m³
-    accuracy_decimals: 0
     filters:
       - multiply: 3 #系数在2-4.5之间
       - median:
           send_every: 10
-  compensation:
-    temperature_source: temperature
-    humidity_source: humidity
-  store_baseline: yes
-  address: 0x58
-  update_interval: 1s
 - platform: hdc1080
   i2c_id: th_bus
+  update_interval: 10s
   temperature:
     name: "DAIKIN Temperature Sensor"
+    id: temperature
     filters:
       - offset: -6.0
-    id: temperature
   humidity:
     name: "DAIKIN Humidity Sensor"
+    id: humidity
     filters:
       - offset: 15.0
-    id: humidity
-  update_interval: 10s
 - platform: wifi_signal
   name: "DAIKIN Signal"
 
 switch:
+- platform: template
+  name: "DAIKIN Sleep Mode"
+  icon: mdi:power-sleep
+  id: sleepmode
+  optimistic: true
 - platform: custom
   lambda: |-
     auto cm1106Calib = new CM1106CalibrateSwitch(id(cm1106_uart));
     App.register_component(cm1106Calib);
     return {cm1106Calib};
   switches:
-  - id: calibration
+    id: calibration
     internal: true
 - platform: gpio
   pin: 4
   id: co2led
-  icon: mdi:led-off
-  name: "DAIKIN CO2 LED"
+  internal: true
 - platform: gpio
   pin: 32
   id: tvocch2oled
-  icon: mdi:led-off
-  name: "DAIKIN TVOC/CH2O LED"
+  internal: true
 - platform: gpio
   pin: 33
   id: pm25led
-  icon: mdi:led-off
-  name: "DAIKIN PM2.5 LED"
+  internal: true
 
 status_led:
   pin: 25
 
-button:
-- platform: restart
-  name: "DAIKIN Restart"
+number:
 - platform: template
-  name: "DAIKIN CO2 Calibration" #按下后会将当前环境CO2浓度设置为基准400ppm，按下时请确保放入室外或此时CO2浓度足够低
+  name: "DAIKIN Threshold CO2"
   entity_category: "config"
-  on_press:
-    then:
-      - switch.turn_on: calibration
+  id: co2threshold
+  optimistic: true
+  unit_of_measurement: "ppm"
+  min_value: 400
+  max_value: 5000
+  step: 100
+  initial_value: 1000
+  restore_value: true
+- platform: template
+  name: "DAIKIN Threshold PM2.5"
+  entity_category: "config"
+  id: pm25threshold
+  optimistic: true
+  unit_of_measurement: μg/m³
+  min_value: 0
+  max_value: 200
+  step: 10
+  initial_value: 50
+  restore_value: true
+- platform: template
+  name: "DAIKIN Threshold TVOC"
+  entity_category: "config"
+  id: tvocthreshold
+  optimistic: true
+  unit_of_measurement: μg/m³
+  min_value: 0
+  max_value: 10000
+  step: 1000
+  initial_value: 1000
+  restore_value: true
+- platform: template
+  name: "DAIKIN Threshold CH2O"
+  entity_category: "config"
+  id: ch2othreshold
+  optimistic: true
+  unit_of_measurement: μg/m³
+  min_value: 10
+  max_value: 200
+  step: 10
+  initial_value: 100
+  restore_value: true
 
 binary_sensor:
 - platform: template
   internal: true
-  id: indicator
+  id: tvocch2olambda
   lambda: |-
-    if (id(ze08_ch2o).state < 100 && id(sgp30_tvoc).state < 1000) {
-      return true;
+    if (id(sleepmode).state == false) {
+      if (id(ze08_ch2o).state < id(ch2othreshold).state && id(tvocsensor).state < id(tvocthreshold).state) {
+        return false;
+      } else {
+        return true;
+    }
     } else {
       return false;
     }
   on_press:
     then:
-      - switch.turn_off: tvocch2oled
+      - switch.turn_on: tvocch2oled
   on_release:
     then:
-      - switch.turn_on: tvocch2oled
+      - switch.turn_off: tvocch2oled
+- platform: template
+  internal: true
+  id: co2lambda
+  lambda: |-
+    if (id(sleepmode).state == false) {
+      if (id(co2sensor).state < id(co2threshold).state) {
+        return false;
+      } else {
+        return true;
+    }
+    } else {
+      return false;
+    }
+  on_press:
+    then:
+      - switch.turn_on: co2led
+  on_release:
+    then:
+      - switch.turn_off: co2led
+- platform: template
+  internal: true
+  id: pm25lambda
+  lambda: |-
+    if (id(sleepmode).state == false) {
+      if (id(pm25sensor).state < id(pm25threshold).state) {
+        return false;
+      } else {
+        return true;
+    }
+    } else {
+      return false;
+    }
+  on_press:
+    then:
+      - switch.turn_on: pm25led
+  on_release:
+    then:
+      - switch.turn_off: pm25led
 - platform: template
   internal: true
   id: co2_calibration #CO2持续400ppm并保持5分钟会自动校准
@@ -212,10 +276,18 @@ binary_sensor:
 #   pin: 34
 #   id: RESET
 #   internal: true
-#   on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm并关闭CO2指示灯
+#   on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm
 #     then:
 #       - switch.turn_on: co2led
 #       - delay: 5min #可自定义修改时间
 #       - switch.turn_on: calibration
-#       - delay: 10s
-#       - switch.turn_off: co2led
+
+button:
+- platform: restart
+  name: "DAIKIN Restart"
+- platform: template
+  name: "DAIKIN CO2 Calibration" #按下后会将当前环境CO2浓度设置为基准400ppm，按下时请确保放入室外或此时CO2浓度足够低
+  entity_category: "config"
+  on_press:
+    then:
+      - switch.turn_on: calibration
