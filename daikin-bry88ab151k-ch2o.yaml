@@ -2,14 +2,14 @@ esphome:
   name: daikin-air-sensor
   project:
     name: "DAIKIN.BRY88AB151K"
-    # version: "PM2105" #根据自己PM2.5传感器型号选择，方便后续OTA查找文件
-    version: "PM2005"
+    version: "PM2105" #根据PM2.5传感器型号选择，方便后续OTA查找文件
+    # version: "PM2005"
   name_add_mac_suffix: true
   includes:
     - "ze08-ch2o.h"
     - "cm1106.h"
-    # - "pm2105.h"  #根据自己PM2.5传感器型号选择对应的文件
-    - "pm2005.h"
+    - "pm2105.h"  #根据PM2.5传感器型号选择
+    # - "pm2005.h"
 
 esp32:
   board: nodemcu-32s
@@ -97,7 +97,7 @@ sensor:
     temperature_source: temperature
     humidity_source: humidity
   eco2:
-    name: "DAIKIN eCO2 Sensor"
+    id: eco2sensor
     internal: true
   tvoc:
     name: "DAIKIN TVOC Sensor"
@@ -127,7 +127,7 @@ sensor:
 switch:
 - platform: template
   name: "DAIKIN Sleep Mode"
-  icon: mdi:power-sleep
+  icon: mdi:sleep
   id: sleepmode
   optimistic: true
 - platform: custom
@@ -260,7 +260,7 @@ binary_sensor:
       - switch.turn_off: pm25led
 - platform: template
   internal: true
-  id: co2_calibration #CO2持续400ppm并保持5分钟会自动校准
+  id: co2_calibration
   lambda: |-
     if (id(co2sensor).state == 400) {
       return true;
@@ -268,23 +268,24 @@ binary_sensor:
       return false;
     }
   filters:
-    - delayed_on: 5min
+    - delayed_on: 5min #CO2持续400ppm并保持5分钟会自动校准
   on_press:
     then:
       - switch.turn_on: calibration
-# - platform: gpio
-#   pin: 34
-#   id: RESET
-#   internal: true
-#   on_press:  #按下背面RESET按钮后CO2指示灯亮，5分钟后将当前环境CO2浓度设置为基准400ppm
-#     then:
-#       - switch.turn_on: co2led
-#       - delay: 5min #可自定义修改时间
-#       - switch.turn_on: calibration
+- platform: gpio
+  pin: 34
+  id: RESET
+  internal: true
+  on_press:
+    then:
+      - button.press: reset
 
 button:
 - platform: restart
   name: "DAIKIN Restart"
+- platform: factory_reset
+  id: reset
+  internal: true
 - platform: template
   name: "DAIKIN CO2 Calibration" #按下后会将当前环境CO2浓度设置为基准400ppm，按下时请确保放入室外或此时CO2浓度足够低
   entity_category: "config"
