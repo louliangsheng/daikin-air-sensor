@@ -2,13 +2,13 @@ esphome:
   name: daikin-air-sensor
   project:
     name: "DAIKIN.BRY88AB151K"
-    # version: "PM2105" #根据PM2.5传感器型号选择，方便后续OTA查找文件
-    version: "PM2005"
+    version: "PM2105" #根据PM2.5传感器型号选择，方便后续OTA查找文件
+    # version: "PM2005"
   name_add_mac_suffix: true
   includes:
     - "cm1106.h"
-    # - "pm2105.h"  #根据PM2.5传感器型号选择
-    - "pm2005.h"
+    - "pm2105.h"  #根据PM2.5传感器型号选择
+    # - "pm2005.h"
 
 esp32:
   board: nodemcu-32s
@@ -90,8 +90,7 @@ sensor:
     unit_of_measurement: μg/m³
     filters:
       - multiply: 3 #系数在2-4.5之间
-      - median:
-          send_every: 10
+      - throttle: 10s #减少传感器在前端更新频率
 - platform: hdc1080
   i2c_id: th_bus
   update_interval: 10s
@@ -99,12 +98,12 @@ sensor:
     name: "DAIKIN Temperature Sensor"
     id: temperature
     filters:
-      - offset: -6.0
+      - offset: -7.0
   humidity:
     name: "DAIKIN Humidity Sensor"
     id: humidity
     filters:
-      - offset: 15.0
+      - offset: 20.0
 - platform: wifi_signal
   name: "DAIKIN Signal"
 
@@ -179,10 +178,10 @@ binary_sensor:
   id: tvocch2olambda
   lambda: |-
     if (id(sleepmode).state == false) {
-      if (id(tvocsensor).state < id(tvocthreshold).state) {
-        return false;
-      } else {
+      if (id(tvocsensor).state > id(tvocthreshold).state) {
         return true;
+      } else {
+        return false;
     }
     } else {
       return false;
@@ -198,10 +197,10 @@ binary_sensor:
   id: co2lambda
   lambda: |-
     if (id(sleepmode).state == false) {
-      if (id(co2sensor).state < id(co2threshold).state) {
-        return false;
-      } else {
+      if (id(co2sensor).state > id(co2threshold).state) {
         return true;
+      } else {
+        return false;
     }
     } else {
       return false;
@@ -217,10 +216,10 @@ binary_sensor:
   id: pm25lambda
   lambda: |-
     if (id(sleepmode).state == false) {
-      if (id(pm25sensor).state < id(pm25threshold).state) {
-        return false;
-      } else {
+      if (id(pm25sensor).state > id(pm25threshold).state) {
         return true;
+      } else {
+        return false;
     }
     } else {
       return false;
