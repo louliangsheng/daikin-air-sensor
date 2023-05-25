@@ -27,6 +27,8 @@ web_server:
   port: 80
 
 logger:
+  logs:
+    sensor: WARN
 
 # bluetooth_proxy:  #需要蓝牙代理功能可以打开
 #   active: true
@@ -76,10 +78,7 @@ sensor:
   accuracy_decimals: 0
   update_interval: 10s
   filters:
-    - median:
-        window_size: 3
-        send_every: 3
-        send_first_at: 3
+    - skip_initial: 6 #tgs2602传感器需要约30s以上预热时间
     - lambda: |-
         static float min_value = x;
         if (x < min_value) {
