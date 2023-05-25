@@ -74,6 +74,7 @@ sensor:
   device_class: volatile_organic_compounds
   unit_of_measurement: μg/m³
   accuracy_decimals: 0
+  update_interval: 10s
   filters:
     - median:
         send_first_at: 5
