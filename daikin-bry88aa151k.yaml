@@ -77,7 +77,9 @@ sensor:
   update_interval: 10s
   filters:
     - median:
-        send_first_at: 5
+        window_size: 3
+        send_every: 3
+        send_first_at: 3
     - lambda: |-
         static float min_value = x;
         if (x < min_value) {
@@ -167,10 +169,10 @@ binary_sensor:
   id: tvoclambda
   lambda: |-
     if (id(sleepmode).state == false) {
-      if (id(tvocsensor).state < id(tvocthreshold).state) {
-        return false;
-      } else {
+      if (id(tvocsensor).state > id(tvocthreshold).state) {
         return true;
+      } else {
+        return false;
     }
     } else {
       return false;
@@ -186,10 +188,10 @@ binary_sensor:
   id: co2lambda
   lambda: |-
     if (id(sleepmode).state == false) {
-      if (id(co2sensor).state < id(co2threshold).state) {
-        return false;
-      } else {
+      if (id(co2sensor).state > id(co2threshold).state) {
         return true;
+      } else {
+        return false;
     }
     } else {
       return false;
@@ -205,10 +207,10 @@ binary_sensor:
   id: pm25lambda
   lambda: |-
     if (id(sleepmode).state == false) {
-      if (id(pm25sensor).state < id(pm25threshold).state) {
-        return false;
-      } else {
+      if (id(pm25sensor).state > id(pm25threshold).state) {
         return true;
+      } else {
+        return false;
     }
     } else {
       return false;
