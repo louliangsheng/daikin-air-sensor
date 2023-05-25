@@ -73,6 +73,7 @@ sensor:
   id: tvocsensor
   device_class: volatile_organic_compounds
   unit_of_measurement: μg/m³
+  accuracy_decimals: 0
   filters:
     - median:
         send_first_at: 5
