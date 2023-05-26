@@ -30,6 +30,7 @@ web_server:
 
 logger:
   logs:
+    hdc1080: WARN
     sgp30: WARN
     sensor: WARN
 
@@ -91,6 +92,12 @@ sensor:
     filters:
       - multiply: 3 #系数在2-4.5之间
       - throttle: 10s #减少传感器在前端更新频率
+      - lambda: |-
+          if (x > 10000) {
+            return 10000;
+          } else {
+            return x;
+          }
 - platform: hdc1080
   i2c_id: th_bus
   update_interval: 10s
@@ -98,12 +105,18 @@ sensor:
     name: "DAIKIN Temperature Sensor"
     id: temperature
     filters:
-      - offset: -7.0
+      - offset: -6.5
   humidity:
     name: "DAIKIN Humidity Sensor"
     id: humidity
     filters:
-      - offset: 20.0
+      - multiply: 1.5
+      - lambda: |-
+          if (x > 100) {
+            return 100;
+          } else {
+            return x;
+          }
 - platform: wifi_signal
   name: "DAIKIN Signal"
 
