@@ -105,12 +105,12 @@ sensor:
     name: "DAIKIN Temperature Sensor"
     id: temperature
     filters:
-      - offset: -6.5
+      - offset: -6.0
   humidity:
     name: "DAIKIN Humidity Sensor"
     id: humidity
     filters:
-      - multiply: 1.5
+      - multiply: 1.4
       - lambda: |-
           if (x > 100) {
             return 100;
