@@ -28,6 +28,7 @@ web_server:
 
 logger:
   logs:
+    hdc1080: WARN
     sensor: WARN
 
 # bluetooth_proxy:  #需要蓝牙代理功能可以打开
@@ -76,9 +77,9 @@ sensor:
   device_class: volatile_organic_compounds
   unit_of_measurement: μg/m³
   accuracy_decimals: 0
-  update_interval: 10s
+  update_interval: 15s
   filters:
-    - skip_initial: 6 #tgs2602传感器需要约30s以上预热时间
+    - skip_initial: 4 #tgs2602传感器需要约30s以上预热时间
     - lambda: |-
         static float min_value = x;
         if (x < min_value) {
@@ -87,7 +88,7 @@ sensor:
         float diff = x - min_value;
         return diff * 4000 + 1;
 - platform: hdc1080
-  update_interval: 10s
+  update_interval: 15s
   temperature:
     name: "DAIKIN Temperature Sensor"
     filters:
