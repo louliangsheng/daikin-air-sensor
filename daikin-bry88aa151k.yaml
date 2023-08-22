@@ -30,6 +30,7 @@ logger:
   logs:
     hdc1080: WARN
     sensor: WARN
+    component: ERROR
 
 # bluetooth_proxy:  #需要蓝牙代理功能可以打开
 #   active: true
@@ -58,6 +59,7 @@ sensor:
   - name: "DAIKIN CO2 Sensor"
     id: co2sensor
     device_class: carbon_dioxide
+    state_class: measurement
     unit_of_measurement: "ppm"
 - platform: custom
   lambda: |-
@@ -68,6 +70,7 @@ sensor:
   - name: "DAIKIN PM2.5 Sensor "
     id: pm25sensor
     device_class: pm25
+    state_class: measurement
     unit_of_measurement: μg/m³
 - platform: adc
   pin: 34
@@ -79,22 +82,32 @@ sensor:
   accuracy_decimals: 0
   update_interval: 15s
   filters:
-    - skip_initial: 4 #tgs2602传感器需要约30s以上预热时间
+    - skip_initial: 3 #tgs2602传感器需要约30s以上预热时间
     - lambda: |-
         static float min_value = x;
         if (x < min_value) {
           min_value = x;
         }
         float diff = x - min_value;
-        return diff * 4000 + 1;
+        if (diff * 4000 * id(tvocmultiply).state + 1 > id(tvocmax).state) {
+          return id(tvocmax).state;
+        } else {
+          return diff * 4000 * id(tvocmultiply).state + 1;
+        }
 - platform: hdc1080
   update_interval: 15s
   temperature:
     name: "DAIKIN Temperature Sensor"
+    id: temperature
     filters:
-      - offset: -1
+      - lambda: return x - id(temperatureoffset).state;
   humidity:
     name: "DAIKIN Humidity Sensor"
+    id: humidity
+    filters:
+      - lambda: return x * id(humiditymultiply).state;
+      - clamp:
+          max_value: 100
 - platform: wifi_signal
   name: "DAIKIN Signal"
 
@@ -161,6 +174,47 @@ number:
   max_value: 10000
   step: 1000
   initial_value: 1000
+  restore_value: true
+- platform: template
+  name: "DAIKIN TVOC MAX"
+  entity_category: "config"
+  id: tvocmax
+  optimistic: true
+  unit_of_measurement: μg/m³
+  min_value: 3000
+  max_value: 10000
+  step: 1000
+  initial_value: 5000
+  restore_value: true
+- platform: template
+  name: "DAIKIN TVOC Multiply"
+  entity_category: "config"
+  id: tvocmultiply
+  optimistic: true
+  min_value: 0.2
+  max_value: 5
+  step: 0.1
+  initial_value: 1
+  restore_value: true
+- platform: template
+  name: "DAIKIN Humidity Multiply"
+  entity_category: "config"
+  id: humiditymultiply
+  optimistic: true
+  min_value: 1
+  max_value: 1.2
+  step: 0.01
+  initial_value: 1
+  restore_value: true
+- platform: template
+  name: "DAIKIN Temperature Offset"
+  entity_category: "config"
+  id: temperatureoffset
+  optimistic: true
+  min_value: 0
+  max_value: 5
+  step: 0.1
+  initial_value: 1
   restore_value: true
 
 binary_sensor:
@@ -246,12 +300,13 @@ binary_sensor:
 button:
 - platform: restart
   name: "DAIKIN Restart"
+  entity_category: "diagnostic"
 - platform: factory_reset
   id: reset
   internal: true
 - platform: template
   name: "DAIKIN CO2 Calibration" #按下后会将当前环境CO2浓度设置为基准400ppm，按下时请确保放入室外或此时CO2浓度足够低
-  entity_category: "config"
+  entity_category: "diagnostic"
   on_press:
     then:
       - switch.turn_on: calibration
