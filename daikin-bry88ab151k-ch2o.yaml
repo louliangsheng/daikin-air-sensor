@@ -206,7 +206,7 @@ number:
   optimistic: true
   unit_of_measurement: μg/m³
   min_value: 0
-  max_value: 50000
+  max_value: 20000
   step: 1000
   initial_value: 1000
   restore_value: true
@@ -217,7 +217,7 @@ number:
   optimistic: true
   unit_of_measurement: μg/m³
   min_value: 5000
-  max_value: 50000
+  max_value: 20000
   step: 1000
   initial_value: 10000
   restore_value: true
