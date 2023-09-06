@@ -72,7 +72,7 @@ sensor:
   id: ze08_ch2o
   device_class: volatile_organic_compounds
   state_class: measurement
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   accuracy_decimals: 0
 - platform: custom
   lambda: |-
@@ -95,7 +95,7 @@ sensor:
     id: pm25sensor
     device_class: pm25
     state_class: measurement
-    unit_of_measurement: μg/m³
+    unit_of_measurement: "µg/m³"
 - platform: sgp30
   i2c_id: th_bus
   compensation:
@@ -108,7 +108,7 @@ sensor:
     name: "DAIKIN TVOC Sensor"
     id: tvocsensor
     device_class: volatile_organic_compounds
-    unit_of_measurement: μg/m³
+    unit_of_measurement: "µg/m³"
     filters:
       - throttle: 15s
       - lambda: |-
@@ -182,7 +182,7 @@ number:
   entity_category: "config"
   id: pm25threshold
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 0
   max_value: 200
   step: 10
@@ -193,7 +193,7 @@ number:
   entity_category: "config"
   id: ch2othreshold
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 10
   max_value: 200
   step: 10
@@ -204,7 +204,7 @@ number:
   entity_category: "config"
   id: tvocthreshold
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 0
   max_value: 20000
   step: 1000
@@ -215,7 +215,7 @@ number:
   entity_category: "config"
   id: tvocmax
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 5000
   max_value: 20000
   step: 1000
