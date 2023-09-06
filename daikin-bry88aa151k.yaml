@@ -71,14 +71,14 @@ sensor:
     id: pm25sensor
     device_class: pm25
     state_class: measurement
-    unit_of_measurement: μg/m³
+    unit_of_measurement: "µg/m³"
 - platform: adc
   pin: 34
   attenuation: auto
   name: "DAIKIN TVOC Sensor"
   id: tvocsensor
   device_class: volatile_organic_compounds
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   accuracy_decimals: 0
   update_interval: 15s
   filters:
@@ -158,7 +158,7 @@ number:
   entity_category: "config"
   id: pm25threshold
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 0
   max_value: 200
   step: 10
@@ -169,7 +169,7 @@ number:
   entity_category: "config"
   id: tvocthreshold
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 0
   max_value: 10000
   step: 1000
@@ -180,7 +180,7 @@ number:
   entity_category: "config"
   id: tvocmax
   optimistic: true
-  unit_of_measurement: μg/m³
+  unit_of_measurement: "µg/m³"
   min_value: 3000
   max_value: 10000
   step: 1000
