@@ -15,14 +15,15 @@ esp32:
   board: nodemcu-32s
 
 wifi: 
-  ssid: 'L' #填写自己的WiFi及密码
-  password: '1234567890'
+  # ssid: 'L' #填写自己的WiFi及密码
+  # password: '1234567890'
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
 captive_portal:
 
 api:
+  reboot_timeout: 0s
 
 ota:
 
@@ -138,6 +139,7 @@ sensor:
 switch:
 - platform: template
   name: "DAIKIN Sleep Mode"
+  restore_mode: RESTORE_DEFAULT_ON
   icon: mdi:sleep
   id: sleepmode
   optimistic: true
@@ -345,10 +347,3 @@ button:
   on_press:
     then:
       - switch.turn_on: calibration
-# - platform: template
-#   name: "DAIKIN CH2O ACTIVE" #按下后打开甲醛传感器主动上报模式，仅用于插回原厂固件机器上，ESPHome无法继续解析数据，重启ESPHome后自动打开问答模式
-#   entity_category: "diagnostic"
-#   on_press:
-#     - uart.write: 
-#         id: uart_ze08
-#         data: [0xFF, 0x01, 0x78, 0x40, 0x00, 0x00, 0x00, 0x00, 0x47]
