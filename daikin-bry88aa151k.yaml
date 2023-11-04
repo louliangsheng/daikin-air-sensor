@@ -20,6 +20,7 @@ wifi:
 captive_portal:
 
 api:
+  reboot_timeout: 0s
 
 ota:
 
@@ -80,19 +81,20 @@ sensor:
   device_class: volatile_organic_compounds
   unit_of_measurement: "µg/m³"
   accuracy_decimals: 0
-  update_interval: 15s
+  update_interval: 3s
   filters:
-    - skip_initial: 3 #tgs2602传感器需要约30s以上预热时间
+    - skip_initial: 12 #tgs2602传感器需要约30s以上预热时间
+    - median: 
     - lambda: |-
         static float min_value = x;
         if (x < min_value) {
           min_value = x;
         }
         float diff = x - min_value;
-        if (diff * 4000 * id(tvocmultiply).state + 1 > id(tvocmax).state) {
+        if (diff * 3000 * id(tvocmultiply).state > id(tvocmax).state) {
           return id(tvocmax).state;
         } else {
-          return diff * 4000 * id(tvocmultiply).state + 1;
+          return diff * 3000 * id(tvocmultiply).state;
         }
 - platform: hdc1080
   update_interval: 15s
@@ -114,6 +116,7 @@ sensor:
 switch:
 - platform: template
   name: "DAIKIN Sleep Mode"
+  restore_mode: RESTORE_DEFAULT_ON
   icon: mdi:sleep
   id: sleepmode
   optimistic: true
@@ -191,9 +194,9 @@ number:
   entity_category: "config"
   id: tvocmultiply
   optimistic: true
-  min_value: 0.2
-  max_value: 5
-  step: 0.1
+  min_value: 0.3
+  max_value: 3
+  step: 0.05
   initial_value: 1
   restore_value: true
 - platform: template
@@ -202,7 +205,7 @@ number:
   id: humiditymultiply
   optimistic: true
   min_value: 1
-  max_value: 1.2
+  max_value: 1.1
   step: 0.01
   initial_value: 1
   restore_value: true
@@ -212,7 +215,7 @@ number:
   id: temperatureoffset
   optimistic: true
   min_value: 0
-  max_value: 5
+  max_value: 3
   step: 0.1
   initial_value: 1
   restore_value: true
