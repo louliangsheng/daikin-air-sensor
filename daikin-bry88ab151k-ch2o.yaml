@@ -15,8 +15,8 @@ esp32:
   board: nodemcu-32s
 
 wifi: 
-  # ssid: 'L' #填写自己的WiFi及密码
-  # password: '1234567890'
+  ssid: 'L' #填写自己的WiFi及密码
+  password: '1234567890'
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
