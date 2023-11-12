@@ -6,7 +6,7 @@
 ## 编译以及烧录
 1.按照参考链接[视频教程](https://www.bilibili.com/video/BV1PY4y1y7sE)进行拆解。
 
-2.根据需要将header文件夹中的pm2005.h、pm2105.h、cm1106.h和ze08-ch2o.h放入ESPHome配置文件夹中，然后根据传感器选择相应的yaml文件编译固件，若没有编译环境，可直接使用firmware文件夹中编译好的factory固件刷写。
+2.根据需要将header文件夹中的pm2005.h、pm2105.h、cm1106.h放入ESPHome配置文件夹中，然后根据传感器选择相应的yaml文件编译固件，其中PM2.5传感器银色金属外壳是pm2005，黑色塑料外壳的是pm2105，若没有编译环境，可直接使用firmware文件夹中编译好的factory固件刷写。
 
 3.将Power&IIC排线插到PCB板上，BRY88AB151K版为短接图片中GPIO0两个针脚（其中一个为GND），短接后上电即可进入BOOT刷写模式，然后将图片中的RXD TXD GND连接到USB转TTL刷机板的TX RX GND上，USB插到电脑上，进入[WEB ESPHome](https://web.esphome.io/) 烧录固件；BRY88AA151K版刷机原理相同，需要短接GPIO0和GND进入BOOT后通过芯片U0 RXTX刷写；进入BOOT后PCB板上的LED灯不亮，若无法烧录可尝试对调RXD TXD针脚或一直短接GPIO0/GND并重新上电。
 
