@@ -24,9 +24,3 @@
 
 ## 购买链接
 不想刷机的老板可以咸鱼搜索[玩智能的小菜](https://m.tb.cn/h.5JB86dd?tk=sMakWRflt43)，直接购买俺刷好的成品。
-
-## 交流
-- QQ群：[198841186](https://jq.qq.com/?_wv=1027&k=lZAMn5Uo)
-- 微信群：
-
-  <img src="https://user-images.githubusercontent.com/4549099/161735971-0540ce1c-eb49-4aff-8cb3-3bdad15e22f7.png" alt="xiaomi miot weixin group" width="100">
