@@ -12,8 +12,8 @@ esp32:
   board: nodemcu-32s
 
 wifi:
-  ssid: 'L' #填写自己的WiFi及密码
-  password: '1234567890'
+  # ssid: 'L' #填写自己的WiFi及密码
+  # password: '1234567890'
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
@@ -115,10 +115,10 @@ sensor:
 
 switch:
 - platform: template
-  name: "DAIKIN Sleep Mode"
-  restore_mode: RESTORE_DEFAULT_ON
-  icon: mdi:sleep
-  id: sleepmode
+  name: "DAIKIN LED Indicator"
+  restore_mode: RESTORE_DEFAULT_OFF
+  icon: mdi:led-off
+  id: indicator
   optimistic: true
 - platform: custom
   lambda: |-
@@ -225,7 +225,7 @@ binary_sensor:
   internal: true
   id: tvoclambda
   lambda: |-
-    if (id(sleepmode).state == false) {
+    if (id(indicator).state == true) {
       if (id(tvocsensor).state > id(tvocthreshold).state) {
         return true;
       } else {
@@ -244,7 +244,7 @@ binary_sensor:
   internal: true
   id: co2lambda
   lambda: |-
-    if (id(sleepmode).state == false) {
+    if (id(indicator).state == true) {
       if (id(co2sensor).state > id(co2threshold).state) {
         return true;
       } else {
@@ -263,7 +263,7 @@ binary_sensor:
   internal: true
   id: pm25lambda
   lambda: |-
-    if (id(sleepmode).state == false) {
+    if (id(indicator).state == true) {
       if (id(pm25sensor).state > id(pm25threshold).state) {
         return true;
       } else {
