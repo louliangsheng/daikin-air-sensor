@@ -2,21 +2,21 @@ esphome:
   name: daikin-air-sensor
   project:
     name: "DAIKIN.BRY88AB151K"
-    # version: "PM2105" #根据PM2.5传感器型号选择，方便后续OTA查找文件
-    version: "PM2005"
+    version: "PM2105" #根据PM2.5传感器型号选择，方便后续OTA查找文件
+    # version: "PM2005"
   name_add_mac_suffix: true
   includes:
     - "ze08-ch2o.h"
     - "cm1106.h"
-    # - "pm2105.h"  #根据PM2.5传感器型号选择
-    - "pm2005.h"
+    - "pm2105.h"  #根据PM2.5传感器型号选择
+    # - "pm2005.h"
 
 esp32:
   board: nodemcu-32s
 
 wifi: 
-  ssid: 'L' #填写自己的WiFi及密码
-  password: '1234567890'
+  # ssid: 'L' #填写自己的WiFi及密码
+  # password: '1234567890'
   ap:
     ssid: "DAIKIN Fallback Hotspot"
 
@@ -138,10 +138,10 @@ sensor:
 
 switch:
 - platform: template
-  name: "DAIKIN Sleep Mode"
-  restore_mode: RESTORE_DEFAULT_ON
-  icon: mdi:sleep
-  id: sleepmode
+  name: "DAIKIN LED Indicator"
+  restore_mode: RESTORE_DEFAULT_OFF
+  icon: mdi:led-off
+  id: indicator
   optimistic: true
 - platform: custom
   lambda: |-
@@ -259,7 +259,7 @@ binary_sensor:
   internal: true
   id: tvocch2olambda
   lambda: |-
-    if (id(sleepmode).state == false) {
+    if (id(indicator).state == true) {
       if (id(ze08_ch2o).state > id(ch2othreshold).state || id(tvocsensor).state > id(tvocthreshold).state) {
         return true;
       } else {
@@ -278,7 +278,7 @@ binary_sensor:
   internal: true
   id: co2lambda
   lambda: |-
-    if (id(sleepmode).state == false) {
+    if (id(indicator).state == true) {
       if (id(co2sensor).state > id(co2threshold).state) {
         return true;
       } else {
@@ -297,7 +297,7 @@ binary_sensor:
   internal: true
   id: pm25lambda
   lambda: |-
-    if (id(sleepmode).state == false) {
+    if (id(indicator).state == true) {
       if (id(pm25sensor).state > id(pm25threshold).state) {
         return true;
       } else {
