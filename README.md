@@ -23,4 +23,4 @@
 - [CM1106二氧化碳传感器](http://www.gassensor.com.cn/CO2Sensor/info_itemid_94.html) [Header文件](https://github.com/LeoDJ/ESPHome_Nodes)
 
 ## 购买链接
-不想刷机的老板可以咸鱼搜索[玩智能的小菜](https://m.tb.cn/h.5xXGFd7?tk=1jjGWM1cROQ)，直接购买俺刷好的成品，也有兼容原大金APP的DIY甲醛模块单独出售。
+不想刷机的老板可以咸鱼搜索[玩智能的小菜](https://m.tb.cn/h.5xXGFd7?tk=1jjGWM1cROQ)，直接购买俺刷好的成品，包含甲醛模块，同事也有兼容原大金APP的甲醛模块单独出售。
