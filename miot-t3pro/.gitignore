@@ -1,0 +1,6 @@
+# ESP-IDF build artifacts
+esp32/t3pro_adv/build/
+esp32/t3pro_adv/sdkconfig
+esp32/t3pro_adv/sdkconfig.old
+esp32/t3pro_adv/dependencies.lock
+esp32/t3pro_adv/managed_components/
