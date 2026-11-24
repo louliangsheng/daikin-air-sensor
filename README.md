@@ -3,6 +3,12 @@
 
 <img src="https://raw.githubusercontent.com/louliangsheng/daikin-air-sensor/main/image/BRY88AB151K.jpg" width="300">
 
+## 替代固件：米家温湿度计 3 Pro（miot-t3pro）
+
+除了根目录的 ESPHome 方案，还可以把设备伪装成**米家智能温湿度计 3 Pro**，
+用官方原版米家 App 直接添加绑定（无需 Home Assistant），温湿度 / CO₂ 经蓝牙
+网关上云、小爱可语音查询。见 [miot-t3pro/](miot-t3pro/)。
+
 ## 编译以及烧录
 1.按照参考链接[视频教程](https://www.bilibili.com/video/BV1PY4y1y7sE)进行拆解。
 
